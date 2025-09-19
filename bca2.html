@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>BCA 2nd Year Students</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Fredoka+One&display=swap');
+
+    body {
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(135deg, #2498a0, #0e1096);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 2px 2px 8px #000;
+      margin-bottom: 40px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff6, 0 0 20px #f0f, 0 0 30px #0ff;
+      }
+
+      to {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #f0f, 0 0 40px #ff6;
+      }
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .emoji-bg {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 3rem;
+      opacity: 0.2;
+      transform: rotate(20deg);
+    }
+
+    .student-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #2effc0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card h2 {
+      font-family: 'Fredoka One', cursive;
+      color: #14b150;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .shayari {
+      font-size: 1.1rem;
+      color: #2e2e2b;
+    }
+
+    .student-title {
+      font-size: 1rem;
+      color: #ff2e63;
+      font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    /* Pop-up card effect */
+    .card-content {
+      display: none;
+      transition: all 0.3s;
+    }
+
+    .card.active .card-content {
+      display: block;
+    }
+
+    .card-header {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #ff2e63;
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      padding: 8px 0;
+      user-select: none;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 12px;
+      height: 18px;
+      border-radius: 3px;
+      z-index: 9999;
+      pointer-events: none;
+      animation: confetti-fall linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pop-animate {
+      animation: pop 0.6s ease;
+    }
+
+    /* Stylish select dropdown for name selection */
+    #student-name {
+      font-family: 'Orbitron', 'Fredoka One', cursive, sans-serif;
+      font-size: 1.15rem;
+      color: #00ffe1;
+      background: #181c2f;
+      border: 2px solid #ffdd00;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px #0003;
+      transition: border 0.2s;
+    }
+
+    #student-name:focus {
+      border: 2px solid #00ffe1;
+      outline: none;
+    }
+
+    #student-name option {
+      color: #ffdd00;
+      background: #181c2f;
+      font-family: 'Orbitron', 'Fredoka One', cursive, sans-serif;
+      font-size: 1.1rem;
+      padding: 8px;
+    }
+
+    /* Card pop-up animation */
+    @keyframes cardPop {
+      0% {
+        transform: scale(0.7) translateY(40px);
+        opacity: 0;
+      }
+
+      80% {
+        transform: scale(1.05) translateY(-8px);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .card.pop-animate {
+      animation: cardPop 0.7s cubic-bezier(.22, 1.12, .56, 1.08);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎉 BCA 2nd Year Neutron Stars 🎉</h1>
+  <p>Enter the name of your keep it playful 😄</p>
+  </header>
+  <div id="login-section"
+    style="max-width:340px;margin:40px auto 24px auto;padding:24px 18px;background:rgba(0,0,0,0.18);border-radius:14px;box-shadow:0 2px 18px rgba(0,0,0,0.12);">
+    <h2 style="text-align:center;color:#ff2e63;">Select Your Name</h2>
+    <form id="login-form">
+      <select id="student-name"
+        style="width:100%;padding:10px;margin:10px 0 12px 0;border-radius:8px;border:none;font-size:1rem;" required>
+        <option value="">-- Select your name --</option>
+      </select>
+      <label style="color:#fff;">Upload your photo or click from camera:</label>
+      <input type="file" id="student-photo" accept="image/*" capture="user" required style="display:block;margin:10px 0 18px 0;">
+      <button type="submit"
+        style="width:100%;padding:10px;background:#ff2e63;color:#fff;font-weight:bold;border:none;border-radius:8px;font-size:1.1rem;cursor:pointer;">
+        Show My Card
+      </button>
+    </form>
+  </div>
+  <div class="card-container">
+
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#RollNo.1!</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ADITAYA SAHAL" class="student-img">
+        <h2>ADITAYA SAHAL</h2>
+        <p class="shayari">👉 “Aditya भाई class में ऐसे बैठे रहते हैं जैसे teacher PPT fast-forward कर रहा हो।” 🔢</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">💎</span>
+      <div class="card-header">#Silentboy</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ADITYA SAIN" class="student-img">
+        <h2>ADITYA SAIN</h2>
+        <p class="shayari">👉 “Aditya Sen ke answers hamesha 50–50 wale lagte hain — kabhi-pata nahi sahi hoga ya guess.” 🤫</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#SkyAkash</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="AKASH" class="student-img">
+        <h2>AKASH</h2>
+        <p class="shayari">👉 “Akash भाई exam ke time dikhte aise jaise syllabus abhi-abhi WhatsApp pe forward hua हो.” ☁️📉</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌸</span>
+      <div class="card-header">#PerfectAttendanceAksha</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="AKSHA" class="student-img">
+        <h2>AKSHA</h2>
+        <p class="shayari">👉 “Aksha का focus lecture में तब आता है जब teacher attendance बोलते हैं — फिर से जग जाते हैं।” 📅</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#TensionZoneAman</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="AMAN KUMAR" class="student-img">
+        <h2>AMAN </h2>
+        <p class="shayari">👉 “Aman भाई का नाम है Aman, लेकिन viva के time पूरा exam hall tension zone बन जाता है।” 😅
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌟</span>
+      <div class="card-header">#LateEntryAnshu</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ANSHU JANGIR" class="student-img">
+        <h2>ANSHU </h2>
+        <p class="shayari">👉 “Anshu भाई की entry late, और preparation भी mostly last-minute.” 🎬</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#GameKingAshwin</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ASHWIN JANGIR" class="student-img">
+        <h2>ASHWIN </h2>
+        <p class="shayari">👉 “Ashwin class में chill, par exam hall में dimaag Windows update ki tarah slow ho jata hai.” 🕹️</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌿</span>
+      <div class="card-header">#ExcuseMasterChetan</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="CHETAN KUMAR SAINI" class="student-img">
+        <h2>CHETAN </h2>
+        <p class="shayari">👉 “Chetan भाई ke पास हर गलती का नया logic hota है — notes ka logic kam hi मिलता है.” 🎭</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#SympathyJokesDevanshu</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="DEVANSHU" class="student-img">
+        <h2>DEVANSHU</h2>
+        <p class="shayari">👉 “Devyanshu ke jokes pe हंसी कम, aur teacher ki aankh ज्यादा ghoorti hai.” 😬</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#RoyalDipendra</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="DIPENDRA SINGH" class="student-img">
+        <h2>DIPENDRA SINGH</h2>
+        <p class="shayari">👉 “Dipendra भाई padhai mein interest tab tak kam rakhte हैं jab tak group masti chal rahi हो।” 👑</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">💫</span>
+      <div class="card-header">#ConfidentDipesh</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="DIPESH KUMAR SAINI" class="student-img">
+        <h2>DIPESH </h2>
+        <p class="shayari">👉 “Dipesh के पास confidence unlimited है, बस likhne ke time ink hi khatam ho jati है.” 📒</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🦁</span>
+      <div class="card-header">#Prabhu Deva🦁 </div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="GOVIND SINGH SHEKHAWAT" class="student-img">
+        <h2>GOVIND </h2>
+
+        <p class="shayari">👉 “Govind भाई का नाम Singh है, लेकिन viva में आवाज़ मच्छर जैसी हो जाती है।” 🐝</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌟</span>
+      <div class="card-header">#WifiAngryMen🔥</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="HIMANSHU SAINI" class="student-img">
+        <h2>HIMANSHU </h2>
+        <p class="shayari">👉 “Himanshu भाई का Anger WiFi signal जैसा – कभी strong, कभी gone।” 📶</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#NextWeekIshant</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ISHANT" class="student-img">
+        <h2>ISHANT</h2>
+        <p class="shayari">👉 “Ishant भाई हर चीज़ ‘next week’ plan करते हैं… लेकिन वो week कभी आता ही नहीं।” ⏳</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#HeroLookKaran</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="KARAN KUMAR SAINI" class="student-img">
+        <h2>KARAN </h2>
+        <p class="shayari">👉 “Karan भाई का hairstyle हर semester नया, पर answer sheet पुरानी style में रहती है.” 🎥</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌿</span>
+      <div class="card-header">#AlarmBattleLakshya</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="LAKSHYA SWAMI" class="student-img">
+        <h2>LAKSHYA </h2>
+        <p class="shayari">👉 “Lakshya का routine: सोना ज्यादा, padhna कम, aur excuses zyada.” ⏰</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#RoyalSirLokendra</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="LOKENDRA SINGH" class="student-img">
+        <h2>LOKENDRA </h2>
+        <p class="shayari">👉 “Lokendra भाई class mein aise baithe रहते हैं jaise unki seat permanently reserved ho.” 🍔</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌙</span>
+      <div class="card-header">#RareAttendanceMaroof</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="MOHAMMAD MAROOF" class="student-img">
+        <h2>MOHAMMAD MAROOF</h2>
+        <p class="shayari">👉 “Maroof भाई की attendance इतनी rare है कि teacher भी उनसे autograph मांग लें।" 🖊️</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#CanteenCustomerMohit1</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="MOHIT 1" class="student-img">
+        <h2>MOHIT (1)</h2>
+        <p class="shayari">👉 "Mohit (1) भाई की seat class में mostly खाली रहती है — teacher ke note mein hi naam milta hai."</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#PhotoPoseMohit2</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="MOHIT 2" class="student-img">
+        <h2>MOHIT (2)</h2>
+        <p class="shayari">👉 "Mohit (2) भाई photo pose में front, par test paper में backbencher." 📸</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌟</span>
+      <div class="card-header">#TypingSpeedNikhil</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="NIKHIL" class="student-img">
+        <h2>NIKHIL</h2>
+        <p class="shayari">👉 “Nikhil भाई की typing speed इतनी तेज़ है कि WhatsApp keyboard भी जल जाए।” ⌨️🔥</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#CCTVForgetNikhilJangir</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="NIKHIL JANGIR" class="student-img">
+        <h2>NIKHIL JANGIR</h2>
+        <p class="shayari">👉 “Nikhil Jangir भाई का attendance इतना कम है कि CCTV भी भूल जाता है उनका चेहरा।” 🎥</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌈</span>
+      <div class="card-header">#RelaxedNilesh</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="NILESH" class="student-img">
+        <h2>NILESH</h2>
+        <p class="shayari">👉 "Nilesh भाई exam में इतने relaxed रहते हैं कि invigilator भी confuse हो जाता है – पढ़ रहे हैं या सो रहे हैं." 😴</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#FastMindNitesh</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="NITESH" class="student-img">
+        <h2>NITESH</h2>
+        <p class="shayari">👉 "Nitesh भाई की copy हमेशा ‘to be continued…’ वाली लगती है."</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌹</span>
+      <div class="card-header">#Doremon</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PARAS KANWAR" class="student-img">
+        <h2>PARAS KANWAR</h2>
+        <p class="shayari">👉 “हमारी class की Doraemon, gadgets तो नहीं, पर Candey हमेशा pocket में ready रहती हैं।" 🌹</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#ThatBoyPradeep</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PRADEEP" class="student-img">
+        <h2>PRADEEP</h2>
+        <p class="shayari">👉 "Pradeep भाई lecture sunte aise hain jaise unke dimaag mein background DJ chal raha हो." 🤷‍♂️</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌸</span>
+      <div class="card-header">#Dancer Girl🌸</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PRATIKSHA" class="student-img">
+        <h2>PRATIKSHA</h2>
+
+        <p class="shayari">👉 “हमारी class की dancer girl, code से ज़्यादा steps याद rahte हैं।"✨</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#SmilePrince</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PRINCE" class="student-img">
+        <h2>PRINCE</h2>
+        <p class="shayari">👉 “Prince भाई की smile ऐसी है जैसे exam में 100% आ गया हो।” 😁📚</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌟</span>
+      <div class="card-header">#AngelOfPeace🌟</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PRIYANKA" class="student-img">
+        <h2>PRIYANKA</h2>
+
+        <p class="shayari">👉 "Priyanka का dialogue fix: ‘Iss baar pakka ’ — fir wahi purana loop." 🕊️🎶</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#Pushpa🔥</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="PUSHPENDRA" class="student-img">
+        <h2>PUSHPENDRA</h2>
+         <p class="shayari">👉 “Pushpendra भाई का नाम सुनते ही सबको पुष्पों की खुशबू आने लगती है।” 🌺</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">💫</span>
+      <div class="card-header">#laughterBoy</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="RAHUL" class="student-img">
+        <h2>RAHUL</h2>
+        <p class="shayari">👉 "Rahul की motivation दूसरों के लिए, खुद के notes के लिए कभी नहीं." 🎤</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌿</span>
+      <div class="card-header">#MenofWords</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="RAJAT" class="student-img">
+        <h2>RAJAT</h2>
+        <p class="shayari">👉 Exam hall में Rajat का look ऐसा होता है जैसे answer key unhi ke पास हो.💇‍♂️</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#VoltageRohit</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="ROHIT" class="student-img">
+        <h2>ROHIT</h2>
+        <p class="shayari">👉 "Rohit भाई energy har jagah high — par padhai mein low battery mode." 🔋</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#SamSampat</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="SAMPAT" class="student-img">
+        <h2>SAMPAT</h2>
+        <p class="shayari">👉 "Sampat भाई ka naam sunte hi sabko Chair aur fan  yaad aata है." ☕🥟</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">💎</span>
+      <div class="card-header">#BrandShivraj</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="SHIVRAJ" class="student-img">
+        <h2>SHIVRAJ</h2>
+        <p class="shayari">👉 "Shivraj का attitude high, पर practical time pe attendance sheet ke neeche chip jate हैं." 🕶️</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">⚡</span>
+      <div class="card-header">#CompetitionSumeet</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="SUMEET" class="student-img">
+        <h2>SUMEET</h2>
+        <p class="shayari">👉 "Sumit bhai sochte reh jaate हैं ‘kal se shuru karunga’ — और वही चलता रहता है." 🏆</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌸</span>
+      <div class="card-header">#Dancer2.0🌸</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="URVASHI" class="student-img">
+        <h2>URVASHI</h2>
+
+        <p class="shayari">👉Urvashi Dance floor pe bhi confident, aur exam hall mein bhi — बस teacher hamesha confuse rehte hain ki compliment किसके लिए दें।”💃🌼</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🔥</span>
+      <div class="card-header">#NextGenerationMen🔥</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="VANSH" class="student-img">
+        <h2>VANSH</h2>
+        <p class="shayari">👉 "Vansh ki bonding friends se strong, books se weak." 🤜🤛</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">💫</span>
+      <div class="card-header">#HollywoodSmileVishnuKedia</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="VISHNU KEDIA" class="student-img">
+        <h2>VISHNU KEDIA</h2>
+        <p class="shayari">👉 "Vishnu Kedia की smile aisi jaise question samajh liya ho — पर likhne में kuch aur hi दे दिया." 🌟</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="emoji-bg">🌟</span>
+      <div class="card-header">#JungleKing🌟</div>
+      <div class="card-content">
+        <img src="images/aditaya_sahal.jpg" alt="VISHNU SINGH" class="student-img">
+        <h2>VISHNU SINGH</h2>
+        <p class="shayari">👉 "Vishnu Singh की awaaz sab jagah sunai deti है, पर viva में whisper mode on हो जाता है." 🦁</p>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    
+    const colors = ['#ff2e63', '#2498a0', '#f0f', '#ff6', '#0ff', '#431b72', '#fff', '#ff9800', '#4caf50'];
+    const confettiCount = 80;
+
+    function randomBetween(a, b) {
+      return a + Math.random() * (b - a);
+    }
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = randomBetween(0, 100) + 'vw';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration = randomBetween(2, 4) + 's';
+      confetti.style.opacity = randomBetween(0.7, 1);
+      confetti.style.transform = `rotate(${randomBetween(0, 360)}deg)`;
+      document.body.appendChild(confetti);
+
+      confetti.addEventListener('animationend', () => confetti.remove());
+    }
+
+    function startConfetti() {
+      for (let i = 0; i < confettiCount; i++) {
+        setTimeout(createConfettiPiece, i * 60);
+      }
+    }
+
+    window.onload = startConfetti;
+
+    
+    document.querySelectorAll('.card').forEach(card => {
+      card.querySelector('.card-header').addEventListener('click', (e) => {
+        card.classList.toggle('active');
+        e.stopPropagation();
+      });
+    });
+
+  </script>
+  <script>
+  // Hide all cards initially
+  document.querySelector('.card-container').style.display = 'none';
+
+  // Populate dropdown with names from cards
+  const select = document.getElementById('student-name');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const names = cards.map(card => {
+    const h2 = card.querySelector('h2');
+    return h2 ? h2.textContent.trim() : null;
+  }).filter(Boolean);
+
+  names.forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  document.getElementById('login-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = select.value;
+    const photoInput = document.getElementById('student-photo');
+    if(!name) return alert('Please select your name');
+    if(!photoInput.files[0]) return alert('Please upload a photo');
+
+    // Find the card by h2 text
+    const card = cards.find(c => {
+      const h2 = c.querySelector('h2');
+      return h2 && h2.textContent.trim() === name;
+    });
+    if(!card) {
+      alert('No card found for this name.');
+      return;
+    }
+
+    // Read the uploaded photo and process it to a square
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      const img = new window.Image();
+      img.onload = function() {
+        // Crop to center square
+        const size = Math.min(img.width, img.height);
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+        const canvas = document.createElement('canvas');
+        canvas.width = 120; // match .student-img size
+        canvas.height = 120;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 120, 120);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+        // Set the processed image as the card image
+        const cardImg = card.querySelector('img');
+        cardImg.src = dataUrl;
+
+        // Hide login, show only this card
+        document.getElementById('login-section').style.display = 'none';
+        document.querySelector('.card-container').style.display = 'grid';
+        cards.forEach(c => c.style.display = 'none');
+        card.style.display = 'block';
+        card.classList.add('active', 'pop-animate');
+        // Remove animation class after animation ends so it can be reapplied if needed
+        card.addEventListener('animationend', () => card.classList.remove('pop-animate'), { once: true });
+
+        // 🎉 Trigger confetti effect when card is shown
+        startConfetti();
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  });
+</script>
+</body>
+
+</html>

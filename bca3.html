@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🎉 BCA 3rd Year 🎉 </title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #100a6b;
+      --bg2: #9fce1f;
+      --accent1: #00ffe1;
+      --accent2: #ffdd00;
+      --card-dark: rgba(10,10,20,0.9);
+    }
+
+    
+    html,body{height:100%;margin:0;padding:0;font-family:'Baloo 2',cursive;}
+    body{
+      background: linear-gradient(120deg, var(--bg1), var(--bg2));
+      background-size: 400% 400%;
+      animation: bgShift 12s ease infinite;
+      padding: 28px;
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+    @keyframes bgShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    
+    header{ text-align:center;margin-bottom:20px; }
+    header h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:3rem;
+      margin:0;
+      color:#fff;
+      text-shadow:0 0 18px rgba(255,255,255,0.25), 0 0 40px rgba(0,0,0,0.25);
+      animation: neon 2s ease-in-out infinite alternate;
+    }
+    @keyframes neon{
+      from { text-shadow: 0 0 6px #fff, 0 0 14px #ff6ec4; transform:translateY(0); }
+      to   { text-shadow: 0 0 14px #fff, 0 0 28px #00ffe1; transform:translateY(-6px); }
+    }
+    header p{ margin:6px 0 18px; opacity:0.95; font-size:0.95rem; }
+
+    
+    .grid{
+      display:grid;
+      gap:18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items:start;
+    }
+
+  
+    .card{
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-radius:16px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+      transition: transform 350ms cubic-bezier(.2,.9,.3,1), box-shadow 350ms, filter 350ms;
+      transform-origin:center;
+    }
+
+    .card::before{
+      
+      content:'';
+      position:absolute;
+      left:-40%;
+      top:-60%;
+      width:200%;
+      height:200%;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 15%),
+                  linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.00) 60%);
+      transform:rotate(-20deg);
+      pointer-events:none;
+    }
+
+    .card:hover{
+      transform: translateY(-14px) rotate(-2deg) scale(1.06);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.6), 0 0 26px rgba(0,255,225,0.12);
+      filter:brightness(1.03);
+    }
+
+    .name{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:1.25rem;
+      color:var(--accent2);
+      text-shadow:0 0 8px rgba(255,255,255,0.06);
+      margin-bottom:10px;
+      letter-spacing:0.6px;
+    }
+
+    .name .emoji{
+      font-size:1.45rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
+    }
+
+    .shayari{
+      text-align:center;
+      color:#eaeef7;
+      font-style:italic;
+      line-height:1.45;
+      font-size:0.98rem;
+      padding:0 6px;
+    }
+
+    
+    .neon-ring{
+      position:absolute;
+      border-radius:50%;
+      width:140%;
+      height:140%;
+      left:-20%;
+      top:-20%;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:0.06;
+      background: conic-gradient(from 120deg, rgba(0,255,225,0.25), rgba(255,0,140,0.18), rgba(255,255,0,0.12), rgba(0,255,225,0.18));
+      animation: spin 10s linear infinite;
+    }
+    @keyframes spin{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    
+    .sparkles{
+      position:fixed;
+      left:0;right:0;top:0;bottom:0;
+      pointer-events:none;
+      z-index:0;
+    }
+    .sparkle{
+      position:absolute;
+      font-size:18px;
+      opacity:0.12;
+      animation: fall linear infinite;
+    }
+    @keyframes fall{
+      0%{ transform: translateY(-10vh) rotate(0deg); opacity:0 }
+      10%{ opacity:0.7 }
+      100%{ transform: translateY(120vh) rotate(360deg); opacity:0 }
+    }
+
+    
+    @media (max-width:420px){
+      header h1{ font-size:2rem; }
+      .name{ font-size:1.05rem; }
+    }
+
+    .profile-img {
+      display: block;
+      margin: 0 auto 10px auto;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+
+    
+    .card-content img, .profile-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px auto;
+      border: 3px solid var(--accent1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+
+    
+    .card-content {
+      display: none;
+      transition: all 0.3s;
+    }
+    .card.active .card-content {
+      display: block;
+    }
+    .card-header {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--accent2);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      padding: 8px 0;
+      user-select: none;
+    }
+    .card-content h2 {
+      font-family: 'Orbitron', 'Fredoka One', cursive, sans-serif;
+      color: #6cbb11;
+      font-size: 1.35rem;
+      letter-spacing: 1.5px;
+      margin: 10px 0 8px 0;
+      text-shadow: 0 2px 12px #0ff, 0 0 2px #fff, 0 0 8px #00ffe1;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .card-content h2:hover {
+      color: #ffdd00;
+      text-shadow: 0 2px 18px #ffdd00, 0 0 2px #fff, 0 0 8px #ffdd00;
+    }
+
+    /* Stylish select dropdown */
+    #student-name {
+      font-family: 'Orbitron', 'Fredoka One', cursive, sans-serif;
+      font-size: 1.15rem;
+      color: #00ffe1;
+      background: #181c2f;
+      border: 2px solid #ffdd00;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px #0003;
+      transition: border 0.2s;
+    }
+    #student-name:focus {
+      border: 2px solid #00ffe1;
+      outline: none;
+    }
+    #student-name option {
+      color: #ffdd00;
+      background: #181c2f;
+      font-family: 'Orbitron', 'Fredoka One', cursive, sans-serif;
+      font-size: 1.1rem;
+      padding: 8px;
+    }
+
+    /* Card pop-up animation */
+    @keyframes cardPop {
+      0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+      80% { transform: scale(1.05) translateY(-8px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .card.pop-animate {
+      animation: cardPop 0.7s cubic-bezier(.22,1.12,.56,1.08);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌟 BCA 3rd Year Neutron Stars🌟</h1>
+    <p>Below Enter.You keep it playful 😄</p>
+  </header>
+
+  <!-- Add this just above <main class="grid"> -->
+  <!-- Replace the login-section form with this for mobile camera support and style -->
+  <div id="login-section" style="max-width:340px;margin:40px auto 24px auto;padding:24px 18px;background:rgba(0,0,0,0.18);border-radius:14px;box-shadow:0 2px 18px rgba(0,0,0,0.12);">
+    <h2 style="text-align:center;color:#ffdd00;">Select Your Name</h2>
+    <form id="login-form">
+      <select id="student-name" required style="width:100%;padding:10px;margin:10px 0 12px 0;border-radius:8px;border:none;font-size:1rem;">
+        <option value="">-- Select your name --</option>
+      </select>
+      <label style="color:#fff;">Upload your photo or click from camera:</label>
+      <input type="file" id="student-photo" accept="image/*" capture="user" required style="display:block;margin:10px 0 18px 0;">
+      <button type="submit" style="width:100%;padding:10px;background:var(--accent1);color:#222;font-weight:bold;border:none;border-radius:8px;font-size:1.1rem;cursor:pointer;">Show My Card</button>
+    </form>
+  </div>
+
+  <main class="grid">
+
+    
+    <article class="card" data-name="ALISHA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#calcGirl</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ALISHA" alt="ALISHA">
+        <h2>ALISHA</h2>
+       <p>Alisha hamesha top list में रहती हैं, par surprise test आते ही calculator bhi sochta hai “main kya karu ab?” 📚😂</p>
+
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ANKIT KUMAR">
+      <div class="neon-ring"></div>
+      <div class="card-header">#pakkaboy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ANKIT+KUMAR" alt="ANKIT KUMAR">
+        <h2>ANKIT KUMAR</h2>
+        <p>Ankit भाई हर काम ‘कल से पक्का’ बोलते हैं… लेकिन वो कल GPS में भी नहीं मिलता। ⏳</p>
+      </div>
+    </article>
+
+  
+    <article class="card" data-name="ANKIT SHARMA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#SharmaJikaBeta</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ANKIT+SHARMA" alt="ANKIT SHARMA">
+        <h2>ANKIT SHARMA</h2>
+       <p>Ankit Sharma class में normal hi रहते हैं, par practical viva ke tricky सवाल आते hi unki speed 5G se 2G हो जाती है। 📘😅</p>
+
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ANSHU">
+      <div class="neon-ring"></div>
+      <div class="card-header">#sunbeamgirl</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ANSHU" alt="ANSHU">
+        <h2>ANSHU</h2>
+        <p>Anshu की speed WiFi से भी तेज है, बस जब attendance लेने की बारी आती है तब network down हो जाता है। 📶</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ANUSHKA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#SwiftWritergirl</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ANUSHKA" alt="ANUSHKA">
+        <h2>ANUSHKA</h2>
+        <p>Anushka exam में Itna लिखती हैं कि pen भी सोचता है – भाई थोड़ा आराम कर। ✍️</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ARYAN">
+      <div class="neon-ring"></div>
+      <div class="card-header">#daringmen</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ARYAN" alt="ARYAN">
+        <h2>ARYAN</h2>
+        <p>Aryan की पढ़ाई ऐसी है कि syllabus उसे देख के खुद डर जाता है 😅</p>
+      </div>
+    </article>
+
+
+    <article class="card" data-name="ASHA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#HopeGirl</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ASHA" alt="ASHA">
+        <h2>ASHA</h2>
+        <p>Asha मैम का नाम Asha है, लेकिन class की सारी उम्मीदें attendance sheet देखते ही खत्म हो जाती हैं। 😅</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ASHUTOSH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#SEboy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ASHUTOSH" alt="ASHUTOSH">
+        <h2>ASHUTOSH</h2>
+        <p>Ashutosh का syllabus plan: पहले Google search करो, फिर God se pray karo. 🙏📚</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="ATAL">
+      <div class="neon-ring"></div>
+      <div class="card-header">#LastYearMr.fresher</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=ATAL" alt="ATAL">
+        <h2>ATAL</h2>
+        <p>Atal भाई के dialogues सुनकर ऐसा लगता है जैसे Parliament live telecast हो रहा हो। 🎤</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="AYUSH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#FreeBoy</div>
+      <div class="card-content">
+        <img src="Ayush.jpg" alt="AYUSH">
+        <h2>AYUSH</h2>
+        <p>Ayush भाई का tension meter हमेशा zero रहता है… exam हो या viva – बस smile fix है। 😁</p>
+      </div>
+    </article>
+
+  
+    <article class="card" data-name="DEVESH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#Bingemen</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=DEVESH" alt="DEVESH">
+        <h2>DEVESH</h2>
+        <p>Devesh को syllabus देखने पर लगता है—Netflix का season है, khatam hi nahi ho raha😁 </p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="DINESH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#NASAconfidentialfile</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=DINESH" alt="DINESH">
+        <h2>DINESH</h2>
+        <p>Dinesh भाई का timetable NASA भी समझ नहीं सकता। 🚀</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="HARSHIT">
+      <div class="neon-ring"></div>
+      <div class="card-header">#RespectfulBoy</div>
+      <div class="card-content">
+        <img src="Harshit.jpg" alt="HARSHIT">
+        <h2>HARSHIT</h2>
+        <p>Harshit class में कुछ भी बोले, teacher automatically बोले—Very good, beta!😂🙌</p>
+      </div>
+    </article>
+
+    <article class="card" data-name="HITESH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#lastminutemen</div>
+      <div class="card-content">
+        <img src="Hitesh.jpg" alt="HITESH">
+        <h2>HITESH</h2>
+        <p>Hitesh की किताबें सिर्फ exam के एक दिन पहले sunlight देखती हैं🤫</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="KARAN">
+      <div class="neon-ring"></div>
+      <div class="card-header">#sweetboy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=KARAN" alt="KARAN">
+        <h2>KARAN</h2>
+        <p>Karan को सब प्यार से Ladoo कहते हैं, लेकिन exam hall में उसके answers extra sweet कभी नहीं होते 😂🙌 </p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="KOMAL1">
+      <div class="neon-ring"></div>
+      <div class="card-header">#NotesMaker</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=KOMAL" alt="KOMAL">
+        <h2>KOMAL Sharma</h2>
+        <p>Komal Sharma notes banane में expert हैं, par viva में teacher ka ek extra सवाल आते ही lagta hai system restart हो गया। 📝😅</p>
+
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="KOMAL2">
+      <div class="neon-ring"></div>
+      <div class="card-header">#DoubleNameGirl</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=KOMAL+2" alt="KOMAL 2">
+        <h2>KOMAL </h2>
+        <p>दो-दो Komal class में – अब समझ आया double trouble का मतलब। 😜</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="KRISHAN">
+      <div class="neon-ring"></div>
+      <div class="card-header">#sprintsyllabus</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=KRISHAN" alt="KRISHAN">
+        <h2>KRISHAN</h2>
+        <p>Syllabus Krishna से तेज़ भागता है—वो पकड़ ही नहीं पाता 😜</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="MASOOM">
+      <div class="neon-ring"></div>
+      <div class="card-header">#InocentBoy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=MASOOM" alt="MASOOM">
+        <h2>MASOOM</h2>
+        <p>Masoom का नाम ही सब कुछ बता देता है—syllabus से मासूम, preparation से innocent 😏</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="NEERAJ">
+      <div class="neon-ring"></div>
+      <div class="card-header">#Dangerboy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=NEERAJ" alt="NEERAJ">
+        <h2>NEERAJ</h2>
+        <p>Neeraj  Inka confidence level itna high hai ki final exams में भी 'All the best' नहीं, 'good luck' bolte hain teachers ko 😏</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="NIKHIL1">
+      <div class="neon-ring"></div>
+      <div class="card-header">#ActiveBoy</div>
+      <div class="card-content">
+        <img src="NikhilK.jpg" alt="NIKHIL">
+        <h2>NIKHIL</h2>
+        <p>Nikhil की किताबें इतनी नई रहती हैं कि लगता है बस photo shoot के लिए खरीदी हों📱</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="NIKHIL2">
+      <div class="neon-ring"></div>
+      <div class="card-header">#UnseenDouble</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=NIKHIL+2" alt="NIKHIL 2">
+        <h2>NIKHIL 2</h2>
+        <p>दो Nikhil – एक msg करता है, दूसरा unseen कर देता है। 😂</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="NITESH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#proc.Boy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=NITESH" alt="NITESH">
+        <h2>NITESH</h2>
+        <p>Nitesh "Teachers को लगता है Nitesh attentive है, लेकिन वो तो बस next period का इंतज़ार करता है 😂🔢</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="PALAK">
+      <div class="neon-ring"></div>
+      <div class="card-header">#SharpGirl</div>
+      <div class="card-content">
+        <img src="Palak.jpg" alt="PALAK">
+        <h2>PALAK</h2>
+        <p>Palak इतनी sharp हैं कि Google भी बोले – मैडम मुझे मत search करो। 🔍</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="PANKAJ">
+      <div class="neon-ring"></div>
+      <div class="card-header">#ModelBoy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=PANKAJ" alt="PANKAJ">
+        <h2>PANKAJ</h2>
+        <p>Pankaj भाई हर group photo में ऐसे pose देते हैं जैसे modelling contract पक्का हो। 📸</p>
+      </div>
+    </article>
+
+
+    <article class="card" data-name="PIYUSH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#LateBoy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=PIYUSH" alt="PIYUSH">
+        <h2>PIYUSH</h2>
+        <p>Piyush का funda simple है—syllabus भले ही अधूरा हो, guesswork पूरा होना चाहिए✍️</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="PRIYA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#PoliteAnchor</div>
+      <div class="card-content">
+        <img src="Priya.jpg" alt="PRIYA">
+        <h2>PRIYA</h2>
+        <p>हमारी anchoring queen और class की topper, stage पे सबको बोलने का chance देती है, पर marks में किसी को आगे निकलने का chance नहीं देती।😇</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="PRIYANKA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#MehndiArtist❀❁✿</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=PRIYANKA" alt="PRIYANKA">
+        <h2>PRIYANKA</h2>
+        <p>Priyanka हमारी mehndi expert, design तो हाथों पर perfect बनाती है, पर attendance register पर ग़ायब हो जाती है।⚡</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="RAHUL">
+      <div class="neon-ring"></div>
+      <div class="card-header">#Procrastinator@Sleep</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=RAHUL" alt="RAHUL">
+        <h2>RAHUL</h2>
+        <p>Rahul भाई का motto – सुबह उठेंगे… लेकिन दोपहर को। 🛏️</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="SACHIN">
+      <div class="neon-ring"></div>
+      <div class="card-header">#NotOutMen</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=SACHIN" alt="SACHIN">
+        <h2>SACHIN</h2>
+        <p>Sachin exam hall में batting karta है—first 10 min defense, last 10 min sixes of guesswork 🏏</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="SANJAY">
+      <div class="neon-ring"></div>
+      <div class="card-header">#ExcuseMaster</div>
+      <div class="card-content">
+        <img src="Sanjay.jpg" alt="SANJAY">
+        <h2>SANJAY</h2>
+        <p>Sanjay भाई के excuses इतने creative हैं कि उन्हें अलग subject बना देना चाहिए। 🎭</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="SONU">
+      <div class="neon-ring"></div>
+      <div class="card-header">#CRETmen</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=SONU" alt="SONU">
+        <h2>SONU</h2>
+        <p>Sonu strategy: syllabus को shortcut से भी छोटा बना देना 🔊</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="SUMIT">
+      <div class="neon-ring"></div>
+      <div class="card-header">#Namejudwaa</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=SUMIT" alt="SUMIT">
+        <h2>SUMIT</h2>
+        <p>Sumitका Exam hall में face देखकर लगता है, question paper ही wrong college में आ गया है.😂</p>
+      </div>
+    </article>
+
+  
+    <article class="card" data-name="SUMIT">
+      <div class="neon-ring"></div>
+      <div class="card-header">#sleepMen</div>
+      <div class="card-content">
+        <img src="Sumit.jpg" alt="SUMIT 2">
+        <h2>SUMIT 2</h2>
+        <p>SUMIT Exam से एक रात पहले उसका routine है—so jao, kal dekh लेंगे😂</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="SUNNY">
+      <div class="neon-ring"></div>
+      <div class="card-header">#CloudyBoy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=SUNNY" alt="SUNNY">
+        <h2>SUNNY</h2>
+        <p>Sunny भाई का नाम Sunny है, लेकिन exam के time हमेशा cloudy mood में। 🌥️</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="VIKASH">
+      <div class="neon-ring"></div>
+      <div class="card-header">#NCCBoy💪</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=VIKASH" alt="VIKASH">
+        <h2>VIKASH</h2>
+        <p>Vikash हमारा NCC student, parade में हमेशा सीधा चलता है, पर class में आते ही line से हमेशा टेढ़ा हो जाता है।🔰💇</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="VINIT">
+      <div class="neon-ring"></div>
+      <div class="card-header">#MissingMen</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=VINIT" alt="VINIT">
+        <h2>VINIT</h2>
+        <p>Vinit भाई का attendance इतना कम है कि CCTV भी उन्हें miss करता है। 🎥</p>
+      </div>
+    </article>
+
+  
+    <article class="card" data-name="YUVARAJ KANWARIYA">
+      <div class="neon-ring"></div>
+      <div class="card-header">#Latecomer</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=YUVARAJ+KANWARIYA" alt="YUVARAJ">
+        <h2>YUVARAJ</h2>
+        <p>Yuvraj class mein हमेशा piche बैठता है… notes lene के लिए नहीं, बस WiFi पकड़ने के लिए 🍔</p>
+      </div>
+    </article>
+
+    
+    <article class="card" data-name="YUVRAJ KANTIWAL">
+      <div class="neon-ring"></div>
+      <div class="card-header">#FriendBoy</div>
+      <div class="card-content">
+        <img src="https://via.placeholder.com/640x360.png?text=YUVRAJ+KANTIWAL" alt="YUVRAJ KANTIWAL">
+        <h2>YUVRAJ KANTIWAL</h2>
+        <p>Yuvraj का Syllabus से relation ऐसा है जैसे long-distance friendship."🍀</p>
+      </div>
+    </article>
+
+  </main>
+
+  
+  <div class="sparkles">
+    <div class="sparkle" style="left:6%; animation-duration:9s; animation-delay:0s;">✨</div>
+    <div class="sparkle" style="left:18%; animation-duration:11s; animation-delay:2s;">🎊</div>
+    <div class="sparkle" style="left:33%; animation-duration:8s; animation-delay:1s;">🎶</div>
+    <div class="sparkle" style="left:47%; animation-duration:12s; animation-delay:3s;">✨</div>
+    <div class="sparkle" style="left:62%; animation-duration:10s; animation-delay:0.5s;">🎉</div>
+    <div class="sparkle" style="left:78%; animation-duration:13s; animation-delay:2.5s;">🥳</div>
+    <div class="sparkle" style="left:88%; animation-duration:9.5s; animation-delay:1.2s;">✨</div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.card').forEach(card=>{
+      card.querySelector('.card-header').addEventListener('click', (e)=>{
+        card.classList.toggle('active');
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <!-- Add this script just before </body> -->
+  <script>
+  // Hide all cards initially
+  document.querySelector('main.grid').style.display = 'none';
+
+  // Populate dropdown with names from cards
+  const select = document.getElementById('student-name');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const names = cards.map(card => {
+    const h2 = card.querySelector('h2');
+    return h2 ? h2.textContent.trim() : null;
+  }).filter(Boolean);
+
+  names.forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  document.getElementById('login-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = select.value;
+    const photoInput = document.getElementById('student-photo');
+    if(!name) return alert('Please select your name');
+    if(!photoInput.files[0]) return alert('Please upload a photo');
+
+    // Find the card by h2 text
+    const card = cards.find(c => {
+      const h2 = c.querySelector('h2');
+      return h2 && h2.textContent.trim() === name;
+    });
+    if(!card) {
+      alert('No card found for this name.');
+      return;
+    }
+
+    // Read the uploaded photo and process it to a square
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      const img = new window.Image();
+      img.onload = function() {
+        // Crop to center square
+        const size = Math.min(img.width, img.height);
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+        const canvas = document.createElement('canvas');
+        canvas.width = 160; // match .card-content img size
+        canvas.height = 160;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 160, 160);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+        // Set the processed image as the card image
+        const cardImg = card.querySelector('img');
+        cardImg.src = dataUrl;
+
+        // Hide login, show only this card
+        document.getElementById('login-section').style.display = 'none';
+        document.querySelector('main.grid').style.display = 'grid';
+        // After showing the card, add the pop-animate class for animation
+        cards.forEach(c => c.style.display = 'none');
+        card.style.display = 'block';
+        card.classList.add('active', 'pop-animate');
+        // Remove animation class after animation ends so it can be reapplied if needed
+        card.addEventListener('animationend', () => card.classList.remove('pop-animate'), { once: true });
+
+        // 🎉 Trigger confetti effect when card is shown
+        startConfetti();
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  });
+
+// --- Add confetti effect functions below this line ---
+  // Confetti effect for card reveal
+  const colors = [
+    "#ff0", "#0ff", "#f0f", "#0f0", "#00f", "#f00"
+  ];
+  function createConfettiParticle(x, y) {
+    const size = Math.random() * 8 + 2;
+    const particle = document.createElement('div');
+    particle.classList.add('sparkle');
+    particle.style.position = 'absolute';
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.borderRadius = '50%';
+    particle.style.pointerEvents = 'none';
+    particle.style.zIndex = '9999';
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.opacity = '0.8';
+    document.body.appendChild(particle);
+
+    // Animate particle
+    particle.animate([
+      { transform: 'translateY(0) scale(1)', opacity: 0.8 },
+      { transform: `translateY(-${Math.random() * 100 + 50}px) scale(0.5)`, opacity: 0 }
+    ], {
+      duration: Math.random() * 700 + 300,
+      easing: 'cubic-bezier(0.5, 1.5, 0.5, 1)',
+      fill: 'forwards'
+    });
+
+    // Remove particle element after animation
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+
+  function startConfetti() {
+    const cardRect = document.querySelector('.card.active').getBoundingClientRect();
+    const centerX = cardRect.left + cardRect.width / 2;
+    const centerY = cardRect.top + cardRect.height / 2;
+
+    for(let i = 0; i < 30; i++) {
+      createConfettiParticle(centerX, centerY);
+    }
+  }
+  </script>
+</body>
+</html>
