@@ -219,8 +219,19 @@
         style="width:100%;padding:10px;margin:10px 0 12px 0;border-radius:8px;border:none;font-size:1rem;" required>
         <option value="">-- Select your name --</option>
       </select>
-      <label style="color:#fff;">Upload your photo or click from camera:</label>
-      <input type="file" id="student-photo" accept="image/*" capture="user" required style="display:block;margin:10px 0 18px 0;">
+      <label style="color:#fff;">Choose a photo:</label>
+      <div style="display:flex;gap:10px;margin:10px 0 18px 0;justify-content:center;">
+        <button type="button" id="upload-btn"
+          style="flex:1;padding:10px;background:#00ffe1;color:#222;font-weight:bold;border:none;border-radius:8px;font-size:1rem;cursor:pointer;">Upload
+          Photo</button>
+        <button type="button" id="camera-btn"
+          style="flex:1;padding:10px;background:#ffdd00;color:#222;font-weight:bold;border:none;border-radius:8px;font-size:1rem;cursor:pointer;">Take
+          Photo</button>
+      </div>
+      <!-- Hidden file inputs -->
+      <input type="file" id="upload-input" accept="image/*" style="display:none;">
+      <input type="file" id="camera-input" accept="image/*" capture="user" style="display:none;">
+      <input type="hidden" id="photo-used" value="">
       <button type="submit"
         style="width:100%;padding:10px;background:#ff2e63;color:#fff;font-weight:bold;border:none;border-radius:8px;font-size:1.1rem;cursor:pointer;">
         Show My Card
@@ -654,12 +665,43 @@
     select.appendChild(opt);
   });
 
+  // Handle upload/camera buttons
+  const uploadBtn = document.getElementById('upload-btn');
+  const cameraBtn = document.getElementById('camera-btn');
+  const uploadInput = document.getElementById('upload-input');
+  const cameraInput = document.getElementById('camera-input');
+  const photoUsed = document.getElementById('photo-used');
+  let selectedFile = null;
+
+  uploadBtn.onclick = () => {
+    uploadInput.click();
+  };
+  cameraBtn.onclick = () => {
+    cameraInput.click();
+  };
+
+  uploadInput.onchange = function() {
+    if (uploadInput.files && uploadInput.files[0]) {
+      selectedFile = uploadInput.files[0];
+      photoUsed.value = 'upload';
+      uploadBtn.style.background = "#b5ffe1";
+      cameraBtn.style.background = "#ffdd00";
+    }
+  };
+  cameraInput.onchange = function() {
+    if (cameraInput.files && cameraInput.files[0]) {
+      selectedFile = cameraInput.files[0];
+      photoUsed.value = 'camera';
+      cameraBtn.style.background = "#ffe577";
+      uploadBtn.style.background = "#00ffe1";
+    }
+  };
+
   document.getElementById('login-form').addEventListener('submit', function(e){
     e.preventDefault();
     const name = select.value;
-    const photoInput = document.getElementById('student-photo');
     if(!name) return alert('Please select your name');
-    if(!photoInput.files[0]) return alert('Please upload a photo');
+    if(!selectedFile) return alert('Please upload or take a photo');
 
     // Find the card by h2 text
     const card = cards.find(c => {
@@ -705,7 +747,7 @@
       };
       img.src = ev.target.result;
     };
-    reader.readAsDataURL(photoInput.files[0]);
+    reader.readAsDataURL(selectedFile);
   });
 </script>
 </body>
